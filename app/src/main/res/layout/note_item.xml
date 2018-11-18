@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginLeft="8dp"
@@ -21,13 +21,24 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
         <TextView
-            android:id="@+id/tv_title"
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:maxLines="1"
+        android:layout_toLeftOf="@+id/tv_priority"
+        android:layout_alignParentLeft="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+        <TextView
+            android:id="@+id/tv_des"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="Title"
+            android:text="Description"
             android:maxLines="1"
             android:layout_toLeftOf="@+id/tv_priority"
+            android:layout_below="@id/tv_title"
+            android:layout_alignParentLeft="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     </RelativeLayout>
 

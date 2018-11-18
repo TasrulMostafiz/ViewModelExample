@@ -1,6 +1,7 @@
 package com.example.guice.viewmodelexample;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * Created by Guice on 11/10/2018.
  */
-
+@Dao
 public interface NoteDao {
     @Insert
     void insert(Note note);

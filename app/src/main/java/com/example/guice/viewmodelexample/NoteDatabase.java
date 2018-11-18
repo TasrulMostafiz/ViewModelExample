@@ -7,6 +7,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 /**
  * Created by Guice on 11/11/2018.
@@ -24,6 +25,7 @@ public abstract class NoteDatabase extends RoomDatabase {
         {
             instance= Room.databaseBuilder(context.getApplicationContext(),NoteDatabase.class,"note_database")
                     .fallbackToDestructiveMigration()
+                    .addCallback(roomCallback)
                     .build();
         }
         return instance;
@@ -48,6 +50,7 @@ public abstract class NoteDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            Log.e("sakib********","*******insert Demo Data");
             noteDao.insert(new Note("Title 1","Description 1",1));
             noteDao.insert(new Note("Title 2","Description 2",2));
             noteDao.insert(new Note("Title 3","Description 3",3));
