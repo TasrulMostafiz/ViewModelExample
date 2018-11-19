@@ -25,19 +25,26 @@ public abstract class NoteDatabase extends RoomDatabase {
         {
             instance= Room.databaseBuilder(context.getApplicationContext(),NoteDatabase.class,"note_database")
                     .fallbackToDestructiveMigration()
-                    .addCallback(roomCallback)
+                    .addCallback(new Callback() {
+                        @Override
+                        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                            super.onCreate(db);
+                            Log.e("sakib********","******* DB Created");
+                            new PopulateDatabaseAsyncTask(instance).execute();
+                        }
+                    })
                     .build();
         }
         return instance;
     }
 
-    private static RoomDatabase.Callback roomCallback=new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-            new PopulateDatabaseAsyncTask(instance).execute();
-        }
-    };
+//    private static RoomDatabase.Callback roomCallback=new RoomDatabase.Callback() {
+//        @Override
+//        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+//            super.onCreate(db);
+//            new PopulateDatabaseAsyncTask(instance).execute();
+//        }
+//    };
 
     private static class PopulateDatabaseAsyncTask extends AsyncTask<Void,Void,Void>
     {
@@ -50,7 +57,7 @@ public abstract class NoteDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            Log.e("sakib********","*******insert Demo Data");
+            Log.e("sakib********","******* Insert Demo Data");
             noteDao.insert(new Note("Title 1","Description 1",1));
             noteDao.insert(new Note("Title 2","Description 2",2));
             noteDao.insert(new Note("Title 3","Description 3",3));
