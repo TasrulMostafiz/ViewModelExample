@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<Note> notes) {
                 Toast.makeText(MainActivity.this, "changed "+ notes.size(), Toast.LENGTH_SHORT).show();
-                adapter.setNotes(notes);
+                adapter.submitList(notes);
             }
         });
 
@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             Note note = new Note(title, description, priority);
             note.setId(id);
             noteViewMOdel.update(note);
+
 
             Toast.makeText(this, "Note updated", Toast.LENGTH_SHORT).show();
         } else {

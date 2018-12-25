@@ -6,8 +6,11 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import java.io.File;
 
 /**
  * Created by Guice on 11/11/2018.
@@ -21,9 +24,14 @@ public abstract class NoteDatabase extends RoomDatabase {
 
     public static synchronized NoteDatabase getInstance(Context context)
     {
+
         if(instance == null)
         {
-            instance= Room.databaseBuilder(context.getApplicationContext(),NoteDatabase.class,"note_database")
+            File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "ViewModelExample_DB");
+            if(!dir.exists()) {
+                dir.mkdirs();
+            }
+            instance= Room.databaseBuilder(context.getApplicationContext(),NoteDatabase.class, Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +"ViewModelExample_DB"+  File.separator +"note_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(new Callback() {
                         @Override
